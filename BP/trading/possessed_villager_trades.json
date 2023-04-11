@@ -1,0 +1,110 @@
+{
+	"tiers": [
+		{
+			"trades": [
+				{
+					"wants": [
+						{
+							"item": "minecraft:diamond",
+							"quantity": {
+								"min": 3,
+								"max": 7
+							}
+						}
+					],
+					"gives": [
+						{
+							"item": "sk:soul_catalyst",
+							"quantity": {
+								"min": 1,
+								"max": 3
+							}
+						}
+					],
+					"max_uses": -1,
+					"reward_exp": true
+				},
+				{
+					"wants": [
+						{
+							"item": "sk:zombie_witch_head",
+							"quantity": {
+								"min": 1,
+								"max": 1
+							}
+						}
+					],
+					"gives": [
+						{
+							"item": "sk:magic_shard",
+							"quantity": {
+								"min": 1,
+								"max": 3
+							}
+						}
+					],
+					"max_uses": -1,
+					"reward_exp": true
+				},
+				{
+					"wants": [
+						{
+							"item": "minecraft:dragon_breath",
+							"quantity": {
+								"min": 3,
+								"max": 3
+							}
+						},
+						{
+							"item": "minecraft:diamond",
+							"quantity": {
+								"min": 6,
+								"max": 8
+							}
+						}
+					],
+					"gives": [
+						{
+							"item": "sk:dragon_essence",
+							"quantity": {
+								"min": 1,
+								"max": 1
+							}
+						}
+					],
+					"max_uses": -1,
+					"reward_exp": true
+				},
+				{
+					"wants": [
+						{
+							"item": "sk:mysterious_scrap",
+							"quantity": {
+								"min": 1,
+								"max": 1
+							}
+						},
+						{
+							"item": "minecraft:diamond",
+							"quantity": {
+								"min": 1,
+								"max": 1
+							}
+						}
+					],
+					"gives": [
+						{
+							"item": "sk:mysterious_ingot",
+							"quantity": {
+								"min": 2,
+								"max": 8
+							}
+						}
+					],
+					"max_uses": -1,
+					"reward_exp": true
+				}
+			]
+		}
+	]
+}
