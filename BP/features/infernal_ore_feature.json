@@ -1,0 +1,24 @@
+{
+	"format_version": "1.17.0",
+	"minecraft:ore_feature": {
+		"description": {
+			"identifier": "sk:infernal_ore_feature"
+		},
+		"count": 3,
+		"replace_rules": [
+			{
+				"places_block": {
+					"name": "sk:infernal_ore",
+					"states": {}
+				}
+			},
+			{
+				"may_replace": [
+					{
+						"name": "minecraft:deepslate"
+					}
+				]
+			}
+		]
+	}
+}

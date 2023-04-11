@@ -1,0 +1,27 @@
+{
+	"format_version": "1.17.0",
+	"minecraft:ore_feature": {
+		"description": {
+			"identifier": "sk:mysterious_block_feature"
+		},
+		"count": 3,
+		"replace_rules": [
+			{
+				"places_block": {
+					"name": "sk:mysterious_block",
+					"states": {}
+				}
+			},
+			{
+				"may_replace": [
+					{
+						"name": "minecraft:deepslate"
+					},
+					{
+						"name": "minecraft:stone"
+					}
+				]
+			}
+		]
+	}
+}
