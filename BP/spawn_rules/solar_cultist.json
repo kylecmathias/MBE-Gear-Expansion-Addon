@@ -1,0 +1,29 @@
+{
+	"format_version": "1.8.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "sk:solar_cultist",
+			"population_control": "pillager"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:difficulty_filter": {
+					"min": "easy",
+					"max": "hard"
+				},
+				"minecraft:weight": {
+					"default": 1
+				},
+				"minecraft:herd": {
+					"max_size": 4,
+					"min_size": 1
+				},
+				"minecraft:brightness_filter": {
+					"max": 15,
+					"min": 7
+				}
+			}
+		]
+	}
+}

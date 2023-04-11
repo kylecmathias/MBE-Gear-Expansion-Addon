@@ -1,0 +1,25 @@
+{
+	"format_version": "1.8.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "sk:solarized_creeper",
+			"population_control": "monster"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_on_surface": {},
+				"minecraft:difficulty_filter": {
+					"max": "hard",
+					"min": "easy"
+				},
+				"minecraft:weight": {
+					"default": 25
+				},
+				"minecraft:brightness_filter": {
+					"min": 0,
+					"max": 4
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"format_version": "1.8.0",
+	"minecraft:spawn_rules": {
+		"description": {
+			"identifier": "sk:reaper",
+			"population_control": "monster"
+		},
+		"conditions": [
+			{
+				"minecraft:spawns_underground": {},
+				"minecraft:biome_filter": {
+					"value": "soulsand_valley",
+					"operator": "==",
+					"test": "has_biome_tag"
+				},
+				"minecraft:difficulty_filter": {
+					"min": "easy",
+					"max": "hard"
+				},
+				"minecraft:weight": {
+					"default": 40
+				},
+				"minecraft:herd": {
+					"max_size": 15,
+					"min_size": 5
+				}
+			}
+		]
+	}
+}
