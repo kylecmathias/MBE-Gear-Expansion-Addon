@@ -1,0 +1,52 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "sk:titanium_anvil",
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:geometry": "geometry.titanium_anvil",
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "sk_titanium_anvil",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:pick_collision": {
+				"origin": [
+					-1,
+					0,
+					-1
+				],
+				"size": [
+					8,
+					16,
+					8
+				]
+			},
+			"minecraft:entity_collision": {
+				"origin": [
+					-1,
+					0,
+					-1
+				],
+				"size": [
+					2,
+					2,
+					2
+				]
+			},
+			"minecraft:crafting_table": {
+				"grid_size": 3,
+				"crafting_tags": [
+					"titanium_anvil"
+				],
+				"custom_description": "Titanium Anvil"
+			},
+			"minecraft:destroy_time": 5,
+			"minecraft:block_light_absorption": 0,
+			"minecraft:block_light_emission": 0.3
+		}
+	}
+}

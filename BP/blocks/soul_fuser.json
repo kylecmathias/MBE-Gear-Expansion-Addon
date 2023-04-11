@@ -1,0 +1,53 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "sk:soul_fuser"
+		},
+		"components": {
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "sk_soul_fuser",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:crafting_table": {
+				"custom_description": "Soul Fuser",
+				"crafting_tags": [
+					"soul_fuser"
+				],
+				"grid_size": 3
+			},
+			"minecraft:geometry": "geometry.standard_block",
+			"minecraft:block_light_absorption": 1,
+			"minecraft:block_light_emission": 1,
+			"minecraft:destroy_time": 0.8,
+			"minecraft:display_name": "Soul Fuser",
+			"minecraft:pick_collision": {
+				"origin": [
+					-1,
+					0,
+					-1
+				],
+				"size": [
+					8,
+					16,
+					8
+				]
+			},
+			"minecraft:entity_collision": {
+				"origin": [
+					-1,
+					0,
+					-1
+				],
+				"size": [
+					2,
+					2,
+					2
+				]
+			},
+			"minecraft:explosion_resistance": 4
+		}
+	}
+}

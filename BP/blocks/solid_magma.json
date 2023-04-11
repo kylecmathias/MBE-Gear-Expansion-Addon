@@ -1,0 +1,63 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "sk:solid_magma"
+		},
+		"components": {
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "sk_solid_magma",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:destroy_time": 2.3,
+			"minecraft:block_light_emission": 1,
+			"minecraft:block_light_absorption": 0,
+			"minecraft:entity_collision": {
+				"size": [
+					16,
+					16,
+					16
+				],
+				"origin": [
+					-8,
+					0,
+					-8
+				]
+			},
+			"minecraft:pick_collision": {
+				"size": [
+					16,
+					16,
+					16
+				],
+				"origin": [
+					-8,
+					0,
+					-8
+				]
+			},
+			"minecraft:loot": "loot_tables/empty.json",
+			"minecraft:ticking": {
+				"range": [
+					4,
+					6
+				],
+				"on_tick": {
+					"event": "minecraft:destroy"
+				}
+			}
+		},
+		"events": {
+			"minecraft:destroy": {
+				"run_command": {
+					"command": [
+						"setblock ~ ~ ~ lava"
+					]
+				}
+			}
+		}
+	}
+}

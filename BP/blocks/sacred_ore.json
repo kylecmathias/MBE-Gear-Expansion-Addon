@@ -1,0 +1,21 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "sk:sacred_ore",
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:destroy_time": 5,
+			"minecraft:explosion_resistance": 5,
+			"minecraft:map_color": "#ffffff",
+			"minecraft:unit_cube": {},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "sk_sacred_ore",
+					"render_method": "opaque"
+				}
+			}
+		}
+	}
+}
