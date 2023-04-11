@@ -1,0 +1,68 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:malice_beam",
+			"is_summonable": true,
+			"is_spawnable": false
+		},
+		"component_groups": {
+			"detonation": {
+				"minecraft:explode": {
+					"fuse_lit": true,
+					"fuse_length": {
+						"range_min": -1,
+						"range_max": -1
+					},
+					"causes_fire": false,
+					"breaks_blocks": true,
+					"power": 5
+				}
+			}
+		},
+		"components": {
+			"minecraft:collision_box": {},
+			"minecraft:projectile": {
+				"on_hit": {
+					"definition_event": {
+						"event_trigger": {
+							"event": "detonate"
+						}
+					},
+					"impact_damage": {
+						"damage": 0
+					}
+				},
+				"power": 1,
+				"angle_offset": -15,
+				"inertia": 0.85,
+				"offset": [
+					0,
+					-0.1,
+					0
+				],
+				"liquid_inertia": 0.4,
+				"destroyOnHurt": false,
+				"anchor": 1
+			},
+			"minecraft:physics": {
+				"has_collision": true,
+				"has_gravity": true
+			},
+			"minecraft:despawn": {
+				"despawn_from_distance": {
+					"min_distance": 300
+				}
+			}
+		},
+		"events": {
+			"detonate": {
+				"add": {
+					"component_groups": [
+						"detonation"
+					]
+				}
+			}
+		}
+	}
+}

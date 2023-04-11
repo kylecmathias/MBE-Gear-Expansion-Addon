@@ -1,0 +1,66 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:sorrow_bullet",
+			"is_summonable": true,
+			"is_spawnable": false,
+			"runtime_identifier": "minecraft:snowball"
+		},
+		"component_groups": {
+			"explode": {
+				"minecraft:explode": {
+					"fuse_length": -1,
+					"breaks_blocks": false,
+					"causes_fire": false,
+					"power": 5,
+					"fuse_lit": true
+				}
+			}
+		},
+		"components": {
+			"minecraft:projectile": {
+				"on_hit": {
+					"stick_in_ground": {},
+					"impact_damage": {
+						"damage": 15
+					}
+				},
+				"angle_offset": 0,
+				"offset": [
+					0,
+					-0.1,
+					0
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.25,
+				"height": 0.25
+			},
+			"minecraft:entity_sensor": {
+				"sensor_range": 2,
+				"relative_range": false,
+				"minimum_count": 1,
+				"event_filters": {
+					"any_of": [
+						{
+							"test": "is_family",
+							"subject": "other",
+							"value": "mob"
+						}
+					]
+				},
+				"event": "minecraft:start_exploding"
+			}
+		},
+		"events": {
+			"minecraft:start_exploding": {
+				"add": {
+					"component_groups": [
+						"explode"
+					]
+				}
+			}
+		}
+	}
+}

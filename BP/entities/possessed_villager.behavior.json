@@ -1,0 +1,529 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:possessed_villager",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"attack": {
+				"minecraft:behavior.nearest_attackable_target": {
+					"priority": 7,
+					"within_radius": 100,
+					"entity_types": [
+						{
+							"filters": {
+								"all_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "player"
+									},
+									{
+										"test": "has_equipment",
+										"subject": "other",
+										"domain": "head",
+										"operator": "!=",
+										"value": "sk:reaper_helmet"
+									},
+									{
+										"test": "has_equipment",
+										"subject": "other",
+										"domain": "torso",
+										"operator": "!=",
+										"value": "sk:reaper_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"subject": "other",
+										"domain": "leg",
+										"operator": "!=",
+										"value": "sk:reaper_boots"
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			"trade_resupply_component_group": {
+				"minecraft:trade_resupply": {}
+			},
+			"trades": {
+				"minecraft:trade_table": {
+					"table": "trading/possessed_villager_trades.json",
+					"display_name": "Villager?",
+					"new_screen": true
+				}
+			},
+			"spawn_ghoul": {
+				"minecraft:transformation": {
+					"into": "sk:ghoul"
+				}
+			},
+			"villager_skin_0": {
+				"minecraft:skin_id": {
+					"value": 0
+				},
+				"minecraft:economy_trade_table": {
+					"table": "trading/possessed_villager_trades.json",
+					"display_name": "Villager?"
+				}
+			}
+		},
+		"components": {
+			"minecraft:type_family": {
+				"family": [
+					"mob",
+					"ghoul",
+					"possessed_villager",
+					"villager"
+				]
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.9
+			},
+			"minecraft:movement.basic": {},
+			"minecraft:navigation.walk": {
+				"avoid_damage_blocks": true,
+				"can_open_doors": true,
+				"can_pass_doors": true
+			},
+			"minecraft:jump.static": {},
+			"minecraft:annotation.open_door": {},
+			"minecraft:health": {
+				"value": 20
+			},
+			"minecraft:breathable": {
+				"suffocateTime": 15,
+				"total_supply": 15,
+				"breathes_air": true,
+				"breathes_water": true
+			},
+			"minecraft:attack": {
+				"damage": 3
+			},
+			"minecraft:loot": {
+				"table": "loot_tables/possessed_villager.json"
+			},
+			"minecraft:behavior.melee_attack": {
+				"priority": 3
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 7,
+				"speed_multiplier": 1
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 20,
+				"look_distance": 20,
+				"probability": 1
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 10,
+				"must_see": false,
+				"reselect_targets": false,
+				"within_radius": 50,
+				"entity_types": [
+					{
+						"filters": {
+							"all_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"value": "player"
+								},
+								{
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "head",
+									"operator": "!=",
+									"value": "sk:reaper_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "torso",
+									"operator": "!=",
+									"value": "sk:reaper_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "leg",
+									"operator": "!=",
+									"value": "sk:reaper_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"subject": "player",
+									"domain": "feet",
+									"operator": "!=",
+									"value": "sk:reaper_boots"
+								}
+							]
+						}
+					}
+				]
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {},
+			"minecraft:mark_variant": {
+				"value": 0
+			},
+			"minecraft:dweller": {
+				"dwelling_type": "village",
+				"dweller_role": "inhabitant",
+				"update_interval_base": 60,
+				"update_interval_variant": 40,
+				"can_find_poi": true,
+				"can_migrate": true,
+				"first_founding_reward": 5
+			},
+			"minecraft:behavior.trade_with_player": {
+				"priority": 1
+			},
+			"minecraft:on_target_acquired": {
+				"event": "become_angry"
+			},
+			"minecraft:movement": {
+				"value": 0.5
+			},
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"on_damage": {
+							"filters": {
+								"any_of": [
+									{
+										"test": "is_family",
+										"subject": "other",
+										"value": "player"
+									}
+								],
+								"all_of": [
+									{
+										"test": "has_damage",
+										"value": "fatal"
+									}
+								]
+							},
+							"event": "ghoul_mode"
+						}
+					}
+				]
+			}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"sequence": [
+					{
+						"add": {
+							"component_groups": "villager_skin_0"
+						}
+					}
+				]
+			},
+			"minecraft:entity_born": {
+				"sequence": [
+					{
+						"filters": {
+							"test": "has_component",
+							"operator": "!=",
+							"value": "minecraft:skin_id"
+						},
+						"randomize": [
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_0"
+									]
+								}
+							},
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_1"
+									]
+								}
+							},
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_2"
+									]
+								}
+							},
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_3"
+									]
+								}
+							},
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_4"
+									]
+								}
+							},
+							{
+								"weight": 1,
+								"add": {
+									"component_groups": [
+										"villager_skin_5"
+									]
+								}
+							}
+						]
+					},
+					{
+						"filters": {
+							"test": "has_biome_tag",
+							"value": "desert"
+						},
+						"add": {
+							"component_groups": [
+								"desert_villager"
+							]
+						}
+					},
+					{
+						"filters": {
+							"test": "has_biome_tag",
+							"value": "jungle"
+						},
+						"add": {
+							"component_groups": [
+								"jungle_villager"
+							]
+						}
+					},
+					{
+						"filters": {
+							"test": "has_biome_tag",
+							"value": "savanna"
+						},
+						"add": {
+							"component_groups": [
+								"savanna_villager"
+							]
+						}
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_biome_tag",
+									"value": "cold"
+								},
+								{
+									"test": "has_biome_tag",
+									"value": "frozen"
+								}
+							]
+						},
+						"add": {
+							"component_groups": [
+								"snow_villager"
+							]
+						}
+					},
+					{
+						"filters": {
+							"test": "has_biome_tag",
+							"value": "swamp"
+						},
+						"add": {
+							"component_groups": [
+								"swamp_villager"
+							]
+						}
+					},
+					{
+						"filters": {
+							"test": "has_biome_tag",
+							"value": "taiga"
+						},
+						"add": {
+							"component_groups": [
+								"taiga_villager"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:spawn_farmer": {
+				"randomize": [
+					{
+						"weight": 5,
+						"add": {
+							"component_groups": [
+								"farmer",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 5,
+						"add": {
+							"component_groups": [
+								"fisherman",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 5,
+						"add": {
+							"component_groups": [
+								"shepherd",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 5,
+						"add": {
+							"component_groups": [
+								"fletcher",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 5,
+						"add": {
+							"component_groups": [
+								"mason",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:spawn_librarian": {
+				"randomize": [
+					{
+						"weight": 20,
+						"add": {
+							"component_groups": [
+								"librarian",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 20,
+						"add": {
+							"component_groups": [
+								"cartographer",
+								"behavior_possessed_villager",
+								"ghoul"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:spawn_cleric": {
+				"add": {
+					"component_groups": [
+						"cleric",
+						"ghoul",
+						"behavior_possessed_ghoul"
+					]
+				}
+			},
+			"minecraft:spawn_armorer": {
+				"randomize": [
+					{
+						"weight": 6,
+						"add": {
+							"component_groups": [
+								"armorer",
+								"ghoul",
+								"behavior_possessed"
+							]
+						}
+					},
+					{
+						"weight": 6,
+						"add": {
+							"component_groups": [
+								"weaponsmith",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 6,
+						"add": {
+							"component_groups": [
+								"toolsmith",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					}
+				]
+			},
+			"minecraft:spawn_butcher": {
+				"randomize": [
+					{
+						"weight": 10,
+						"add": {
+							"component_groups": [
+								"butcher",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					},
+					{
+						"weight": 10,
+						"add": {
+							"component_groups": [
+								"leatherworker",
+								"ghoul",
+								"behavior_possessed_villager"
+							]
+						}
+					}
+				]
+			},
+			"become_angry": {
+				"add": {
+					"component_groups": [
+						"attack"
+					]
+				}
+			},
+			"ghoul_mode": {
+				"sequence": [
+					{
+						"add": {
+							"component_groups": [
+								"spawn_ghoul"
+							]
+						}
+					}
+				]
+			}
+		}
+	}
+}

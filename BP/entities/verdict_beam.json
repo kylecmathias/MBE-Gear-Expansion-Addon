@@ -1,0 +1,67 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:verdict_beam",
+			"is_summonable": true,
+			"is_spawnable": false,
+			"runtime_identifier": "minecraft:snowball"
+		},
+		"component_groups": {},
+		"components": {
+			"minecraft:projectile": {
+				"on_hit": {
+					"impact_damage": {
+						"damage": 0,
+						"knockback": true
+					},
+					"definition_event": {
+						"event_trigger": {
+							"event": "verdict"
+						},
+						"affect_target": true
+					}
+				},
+				"gravity": 3
+			}
+		},
+		"events": {
+			"verdict": {
+				"randomize": [
+					{
+						"run_command": {
+							"command": [
+								"effect @s weakness 15 5 false"
+							]
+						},
+						"weight": 1
+					},
+					{
+						"run_command": {
+							"command": [
+								"effect @s slowness 15 5 false"
+							]
+						},
+						"weight": 1
+					},
+					{
+						"run_command": {
+							"command": [
+								"effect @s poison 15 1 false"
+							]
+						},
+						"weight": 1
+					},
+					{
+						"run_command": {
+							"command": [
+								"effect @s wither 15 1 false"
+							]
+						},
+						"weight": 1
+					}
+				]
+			}
+		}
+	}
+}

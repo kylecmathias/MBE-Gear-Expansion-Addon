@@ -1,0 +1,47 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:judgement_beam",
+			"is_summonable": true,
+			"is_spawnable": false,
+			"runtime_identifier": "minecraft:snowball"
+		},
+		"component_groups": {},
+		"components": {
+			"minecraft:projectile": {
+				"on_hit": {
+					"impact_damage": {
+						"damage": 20,
+						"knockback": true,
+						"destroy_on_hit": true,
+						"destroy_on_hit_requres_damage": false
+					},
+					"catch_fire": {
+						"on_fire_time": 15,
+						"fire_affected_by_griefing": false
+					},
+					"definition_event": {
+						"affect_target": true,
+						"event_trigger": {
+							"event": "judgement"
+						}
+					}
+				},
+				"gravity": 3
+			}
+		},
+		"events": {
+			"judgement": {
+				"run_command": {
+					"command": [
+						"effect @s weakness 20 10 false",
+						"effect @s wither 20 10 false",
+						"effect @s poison 20 10 false",
+						"effect @s slowness 20 10 false"
+					]
+				}
+			}
+		}
+	}
+}

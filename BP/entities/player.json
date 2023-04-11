@@ -1,0 +1,1242 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "minecraft:player",
+			"is_spawnable": false,
+			"is_summonable": false,
+			"is_experimental": false
+		},
+		"component_groups": {
+			"minecraft:add_bad_omen": {
+				"minecraft:spell_effects": {
+					"add_effects": [
+						{
+							"effect": "bad_omen",
+							"duration": 6000,
+							"display_on_screen_animation": true
+						}
+					]
+				},
+				"minecraft:timer": {
+					"time": [
+						0,
+						0
+					],
+					"looping": false,
+					"time_down_event": {
+						"event": "minecraft:clear_add_bad_omen",
+						"target": "self"
+					}
+				}
+			},
+			"minecraft:clear_bad_omen_spell_effect": {
+				"minecraft:spell_effects": {}
+			},
+			"minecraft:raid_trigger": {
+				"minecraft:raid_trigger": {
+					"triggered_event": {
+						"event": "minecraft:remove_raid_trigger",
+						"target": "self"
+					}
+				},
+				"minecraft:spell_effects": {
+					"remove_effects": "bad_omen"
+				}
+			}
+		},
+		"components": {
+			"minecraft:experience_reward": {
+				"on_death": "Math.Min(query.player_level * 7, 100)"
+			},
+			"minecraft:type_family": {
+				"family": [
+					"player"
+				]
+			},
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:loot": {
+				"table": "loot_tables/empty.json"
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.8
+			},
+			"minecraft:can_climb": {},
+			"minecraft:movement": {
+				"value": 0.1
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:attack": {
+				"damage": 1
+			},
+			"minecraft:player.saturation": {
+				"value": 20
+			},
+			"minecraft:player.exhaustion": {
+				"value": 0,
+				"max": 4
+			},
+			"minecraft:player.level": {
+				"value": 0,
+				"max": 24791
+			},
+			"minecraft:player.experience": {
+				"value": 0,
+				"max": 1
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": -1,
+				"inhale_time": 3.75,
+				"generates_bubbles": false
+			},
+			"minecraft:nameable": {
+				"always_show": true,
+				"allow_name_tag_renaming": false
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:insomnia": {
+				"days_until_insomnia": 3
+			},
+			"minecraft:rideable": {
+				"seat_count": 2,
+				"family_types": [
+					"parrot_tame"
+				],
+				"pull_in_entities": true,
+				"seats": [
+					{
+						"position": [
+							0.4,
+							-0.2,
+							-0.1
+						],
+						"min_rider_count": 0,
+						"max_rider_count": 0,
+						"lock_rider_rotation": 0
+					},
+					{
+						"position": [
+							-0.4,
+							-0.2,
+							-0.1
+						],
+						"min_rider_count": 1,
+						"max_rider_count": 2,
+						"lock_rider_rotation": 0
+					}
+				]
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:scaffolding_climber": {},
+			"minecraft:environment_sensor": {
+				"triggers": [
+					{
+						"filters": {
+							"all_of": [
+								{
+									"test": "has_mob_effect",
+									"subject": "self",
+									"value": "bad_omen"
+								},
+								{
+									"test": "is_in_village",
+									"subject": "self",
+									"value": true
+								}
+							]
+						},
+						"event": "minecraft:trigger_raid"
+					},
+					{
+						"filters": {
+							"all_of": [
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:infernal_boots"
+										}
+									]
+								},
+								{
+									"test": "is_sneaking"
+								}
+							]
+						},
+						"event": "minecraft:magma_walker"
+					},
+					{
+						"filters": {
+							"all_of": [
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:infernal_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:infernal_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:infernal_leggings"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:fire_immune"
+					},
+					{
+						"filters": {
+							"all_of": [
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:sacred_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										}
+									],
+									"test": "has_equipment",
+									"domain": "hand",
+									"value": "sk:flight_emblem"
+								}
+							]
+						},
+						"event": "minecraft:flight"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:turtle_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:turtle_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:turtle_boots"
+								}
+							]
+						},
+						"event": "minecraft:water_breath"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "minecraft:turtle_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:turtle_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:turtle_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:turtle_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:aquatic"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:solar_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:solar_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:solar_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:solar_boots"
+								}
+							]
+						},
+						"event": "minecraft:sun"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:lunar_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:lunar_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:lunar_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:lunar_boots"
+								}
+							]
+						},
+						"event": "minecraft:moon"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:solar_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:solar_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:solar_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:solar_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:suntime"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:lunar_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:lunar_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:lunar_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:lunar_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:moontime"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:astral_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:astral_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:astral_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:astral_boots"
+								}
+							]
+						},
+						"event": "minecraft:boost_health"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:astral_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:astral_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:astral_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:astral_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:astral_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:astral_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:astral_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:astral_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:boost_health2"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:mysterious_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:mysterious_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:mysterious_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:mysterious_boots"
+								}
+							]
+						},
+						"event": "minecraft:mystery"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:mysterious_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:mysterious_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:mysterious_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:mysterious_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:mystery2"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:reaper_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:reaper_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:reaper_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:reaper_boots"
+								}
+							]
+						},
+						"event": "minecraft:fight"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:reaper_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:reaper_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:reaper_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:reaper_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:fight2"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:sacred_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:sacred_leggings"
+								}
+							]
+						},
+						"event": "minecraft:regen"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:sacred_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:sacred_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:sacred_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:sacred_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:regen2"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"test": "has_equipment",
+									"domain": "head",
+									"value": "sk:spectral_helmet"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "torso",
+									"value": "sk:spectral_chestplate"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "leg",
+									"value": "sk:spectral_leggings"
+								},
+								{
+									"test": "has_equipment",
+									"domain": "feet",
+									"value": "sk:spectral_boots"
+								}
+							]
+						},
+						"event": "minecraft:specter"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{
+									"all_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:spectral_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:spectral_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:spectral_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:spectral_boots"
+										}
+									]
+								},
+								{
+									"any_of": [
+										{
+											"test": "has_equipment",
+											"domain": "head",
+											"value": "sk:bloodlust_helmet"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "torso",
+											"value": "sk:bloodlust_chestplate"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "leg",
+											"value": "sk:bloodlust_leggings"
+										},
+										{
+											"test": "has_equipment",
+											"domain": "feet",
+											"value": "sk:bloodlust_boots"
+										}
+									]
+								}
+							]
+						},
+						"event": "minecraft:specter2"
+					}
+				]
+			},
+			"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"on_damage": {
+							"filters": {
+								"any_of": [
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:bloodlust_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:sacred_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:bloodlust_boots"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:solar_boots"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:lunar_boots"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:astral_boots"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "head",
+										"value": "sk:astral_helmet"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:astral_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "leg",
+										"value": "sk:astral_leggings"
+									}
+								]
+							}
+						},
+						"cause": "fall",
+						"deals_damage": false
+					},
+					{
+						"on_damage": {
+							"filters": {
+								"any_of": [
+									{
+										"test": "has_equipment",
+										"domain": "head",
+										"value": "sk:dragon_helmet"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:dragon_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "leg",
+										"value": "sk:dragon_leggings"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:dragon_boots"
+									}
+								]
+							}
+						},
+						"damage_multiplier": 0.75,
+						"cause": "magic"
+					},
+					{
+						"on_damage": {
+							"filters": {
+								"all_of": [
+									{
+										"test": "has_equipment",
+										"domain": "head",
+										"value": "sk:dragon_helmet"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:dragon_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "leg",
+										"value": "sk:dragon_leggings"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:dragon_boots"
+									}
+								]
+							}
+						},
+						"damage_multiplier": 0.5,
+						"cause": "magic"
+					},
+					{
+						"on_damage": {
+							"filters": {
+								"any_of": [
+									{
+										"test": "has_equipment",
+										"domain": "head",
+										"value": "sk:bloodlust_helmet"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "torso",
+										"value": "sk:bloodlust_chestplate"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "leg",
+										"value": "sk:bloodlust_leggings"
+									},
+									{
+										"test": "has_equipment",
+										"domain": "feet",
+										"value": "sk:bloodlust_boots"
+									}
+								]
+							}
+						},
+						"damage_multiplier": 0.25,
+						"cause": "magic"
+					},
+					{
+						"on_damage": {
+							"filters": {
+								"any_of": [
+									{
+										"test": "has_equipment",
+										"domain": "head",
+										"value": "sk:zombie_witch_head"
+									}
+								]
+							}
+						},
+						"damage_multiplier": 0.6,
+						"cause": "magic"
+					}
+				]
+			}
+		},
+		"events": {
+			"minecraft:gain_bad_omen": {
+				"add": {
+					"component_groups": [
+						"minecraft:add_bad_omen"
+					]
+				}
+			},
+			"minecraft:clear_add_bad_omen": {
+				"remove": {
+					"component_groups": [
+						"minecraft:add_bad_omen"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"minecraft:clear_bad_omen_spell_effect"
+					]
+				}
+			},
+			"minecraft:trigger_raid": {
+				"add": {
+					"component_groups": [
+						"minecraft:raid_trigger"
+					]
+				}
+			},
+			"minecraft:remove_raid_trigger": {
+				"remove": {
+					"component_groups": [
+						"minecraft:raid_trigger"
+					]
+				}
+			},
+			"minecraft:magma_walker": {
+				"run_command": {
+					"command": [
+						"fill ~2 ~-1 ~2 ~-2 ~-1 ~-2 sk:solid_magma 0 replace lava -1"
+					]
+				}
+			},
+			"minecraft:flight": {
+				"run_command": {
+					"command": [
+						"execute @p[rx=-15,rxm=-90] ~ ~ ~ effect @s levitation 1 9 true",
+						"execute @p[rx=-15,rxm=-90] ~ ~ ~ effect @s speed 1 4 true",
+						"execute @p[rx=15,rxm=90] ~ ~ ~ effect @s slow_falling 1 1 true"
+					]
+				}
+			},
+			"minecraft:fire_immune": {
+				"run_command": {
+					"command": [
+						"effect @s fire_resistance 1 1 true"
+					]
+				}
+			},
+			"minecraft:water_breath": {
+				"run_command": {
+					"command": [
+						"execute @p ~ ~ ~ detect ~ ~1 ~ air 0 effect @s water_breathing 12 1 true"
+					]
+				}
+			},
+			"minecraft:aquatic": {
+				"run_command": {
+					"command": [
+						"effect @s conduit_power 1 1 true"
+					]
+				}
+			},
+			"minecraft:sun": {
+				"run_command": {
+					"command": [
+						"effect @s speed 1 2 true"
+					]
+				}
+			},
+			"minecraft:moon": {
+				"run_command": {
+					"command": [
+						"effect @s jump_boost 1 2 true"
+					]
+				}
+			},
+			"minecraft:suntime": {
+				"run_command": {
+					"command": [
+						"effect @s speed 1 3 true"
+					]
+				}
+			},
+			"minecraft:moontime": {
+				"run_command": {
+					"command": [
+						"effect @s jump_boost 1 3 true"
+					]
+				}
+			},
+			"minecraft:boost_health": {
+				"run_command": {
+					"command": [
+						"effect @s absorption 1 2 true "
+					]
+				}
+			},
+			"minecraft:boost_health2": {
+				"run_command": {
+					"command": [
+						"effect @s absorption 1 5 true "
+					]
+				}
+			},
+			"minecraft:mystery": {
+				"run_command": {
+					"command": [
+						"effect @s saturation 1 1 true",
+						"effect @s haste 1 2 true"
+					]
+				}
+			},
+			"minecraft:mystery2": {
+				"run_command": {
+					"command": [
+						"effect @s saturation 1 2 true",
+						"effect @s haste 1 3 true"
+					]
+				}
+			},
+			"minecraft:fight": {
+				"run_command": {
+					"command": [
+						"effect @s resistance 1 2 true",
+						"effect @s strength 1 2 true"
+					]
+				}
+			},
+			"minecraft:fight2": {
+				"run_command": {
+					"command": [
+						"effect @s resistance 1 3 true",
+						"effect @s strength 1 3 true"
+					]
+				}
+			},
+			"minecraft:regen": {
+				"run_command": {
+					"command": [
+						"effect @s regeneration 1 2 true"
+					]
+				}
+			},
+			"minecraft:regen2": {
+				"run_command": {
+					"command": [
+						"effect @s regeneration 1 3 true"
+					]
+				}
+			},
+			"minecraft:specter": {
+				"run_command": {
+					"command": [
+						"effect @s village_hero 1 2 true"
+					]
+				}
+			},
+			"minecraft:specter2": {
+				"run_command": {
+					"command": [
+						"effect @s invisibility 1 1 true",
+						"effect @s village_hero 1 3 true"
+					]
+				}
+			}
+		}
+	}
+}

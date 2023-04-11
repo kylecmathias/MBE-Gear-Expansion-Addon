@@ -1,0 +1,46 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:condemnation_beam",
+			"is_summonable": true,
+			"is_spawnable": false,
+			"runtime_identifier": "minecraft:snowball"
+		},
+		"component_groups": {},
+		"components": {
+			"minecraft:collision_box": {
+				"width": 0.2,
+				"height": 0.2
+			},
+			"minecraft:projectile": {
+				"on_hit": {
+					"impact_damage": {
+						"damage": 3,
+						"knockback": false
+					}
+				},
+				"power": 2,
+				"angle_offset": 0,
+				"inertia": 1,
+				"offset": [
+					0,
+					-0.1,
+					0
+				],
+				"liquid_inertia": 1,
+				"gravity": 0.001
+			},
+			"minecraft:physics": {
+				"has_collision": true,
+				"has_gravity": false
+			},
+			"minecraft:despawn": {
+				"despawn_from_distance": {
+					"min_distance": 300
+				}
+			}
+		},
+		"events": {}
+	}
+}

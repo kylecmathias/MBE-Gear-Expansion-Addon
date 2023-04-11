@@ -1,0 +1,120 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:reaper",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:experience_reward": {
+				"on_death": "query.last_hit_by_player?5:0"
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": 0
+			},
+			"minecraft:fire_immune": {},
+			"minecraft:nameable": {},
+			"minecraft:health": {
+				"value": 25,
+				"max": 25
+			},
+			"minecraft:collision_box": {
+				"width": 1,
+				"height": 1
+			},
+			"minecraft:movement": {
+				"value": 0.1
+			},
+			"minecraft:navigation.float": {
+				"can_path_over_water": true
+			},
+			"minecraft:behavior.float_wander": {
+				"priority": 2,
+				"must_reach": true
+			},
+			"minecraft:can_fly": {},
+			"minecraft:loot": {
+				"table": "loot_tables/reaper.json"
+			},
+			"minecraft:type_family": {
+				"family": [
+					"reaper",
+					"monster",
+					"mob"
+				]
+			},
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"cause": "fall",
+					"deals_damage": false
+				}
+			},
+			"minecraft:jump.static": {},
+			"minecraft:despawn": {
+				"despawn_from_distance": {}
+			},
+			"minecraft:behavior.float": {
+				"priority": 0
+			},
+			"minecraft:follow_range": {
+				"value": 64,
+				"max": 64
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 2,
+				"entity_types": [
+					{
+						"filters": {
+							"test": "is_family",
+							"subject": "other",
+							"value": "player"
+						},
+						"max_dist": 50
+					}
+				],
+				"must_see": true
+			},
+			"minecraft:physics": {
+				"has_collision": false,
+				"has_gravity": false
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:behavior.melee_attack": {
+				"track_target": true,
+				"speed_multiplier": 3,
+				"melee_fov": 90
+			},
+			"minecraft:behavior.move_towards_target": {
+				"priority": 4,
+				"speed_multiplier": 3,
+				"within_radius": 30
+			},
+			"minecraft:attack": {
+				"damage": 4,
+				"effect_name": "blindness",
+				"effect_duration": 5
+			},
+			"minecraft:movement.basic": {},
+			"minecraft:behavior.charge_attack": {
+				"priority": 4
+			},
+			"minecraft:shooter": {
+				"def": "sk:reaper_bullet"
+			},
+			"minecraft:behavior.ranged_attack": {
+				"priority": 4,
+				"attack_radius": 40
+			}
+		}
+	}
+}

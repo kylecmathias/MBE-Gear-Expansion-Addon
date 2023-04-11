@@ -1,0 +1,30 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "sk:ultimatum_beam",
+			"is_summonable": true,
+			"is_spawnable": false,
+			"runtime_identifier": "minecraft:snowball"
+		},
+		"component_groups": {},
+		"components": {
+			"minecraft:projectile": {
+				"on_hit": {
+					"impact_damage": {
+						"damage": 11,
+						"knockback": true,
+						"destroy_on_hit": true,
+						"destroy_on_hit_requres_damage": false
+					}
+				},
+				"gravity": 3
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 2
+			}
+		},
+		"events": {}
+	}
+}
