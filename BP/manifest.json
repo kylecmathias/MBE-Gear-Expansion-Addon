@@ -1,0 +1,50 @@
+{
+	"format_version": 2,
+	"header": {
+		"description": "ShedinjaKyle's Awesome Gear Expansion Pack",
+		"name": "Gear Expansion Behavior",
+		"uuid": "e49f1286-2540-4aaa-851a-3e9d8e85a74c",
+		"version": [
+			0,
+			0,
+			1
+		],
+		"min_engine_version": [
+			1,
+			16,
+			0
+		]
+	},
+	"modules": [
+		{
+			"description": "Gear Expansion Behaviour Pack",
+			"type": "data",
+			"uuid": "d2c1b875-b6b3-4f12-88b5-1c044572bbac",
+			"version": [
+				0,
+				0,
+				1
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "b3d12cd1-39d3-48a9-aeae-fae49afd28f2",
+			"version": [
+				0,
+				0,
+				1
+			]
+		}
+	],
+	"metadata": {
+		"generated_with": {
+			"bridge": [
+				"2.6.0"
+			],
+			"dash": [
+				"0.10.8"
+			]
+		}
+	}
+}
